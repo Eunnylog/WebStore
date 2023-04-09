@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    회원가입
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <h2 class="title-center"> 회원가입 </h2>
+            <form class="form-area" action="/sign-up/" method="post">
+                {% csrf_token %}
+                {{ user_form }}
+{#                <div class="form-group mt-2 mb-2">#}
+{#                    <label for="username">이름</label>#}
+{#                    <input type="text" class="form-control" id="username" name="username">#}
+{#                </div>#}
+{#                <div class="form-group mt-2 mb-2">#}
+{#                    <label for="password">비밀번호</label>#}
+{#                    <input type="password" class="form-control" id="password" name="password">#}
+{#                </div>#}
+{#                <div class="form-group mt-2 mb-2">#}
+{#                    <label for="password2">비밀번호 확인</label>#}
+{#                    <input type="password" class="form-control" id="password2" name="password2">#}
+{#                </div>#}
+{#                <div class="form-group mt-2 mb-2">#}
+{#                    <label for="birth">생년월일 6자리 입력</label>#}
+{#                    <input type="number" maxlength="6" class="form-control" id="birth" name="birth">#}
+{#                </div>#}
+                <hr>
+                <div style="float: right">
+                    <button type="submit" class="btn btn-primary">회원가입</button>
+                    <a href="/sign-in" class="btn btn-secondary">로그인 페이지로</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

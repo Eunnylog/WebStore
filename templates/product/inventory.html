@@ -1,0 +1,73 @@
+<!-- templates/tweet/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container timeline-container">
+        <div class="row">
+            <!-- 왼쪽 컬럼 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.username }}</h5>
+                        <p class="card-text">{{ user.birth }}</p>
+
+                    </div>
+                </div>
+            </div>
+            <!-- 오른 쪽 컬럼-->
+            <div class="col-md-7">
+                <!-- 글을 작성 하는 곳 -->
+                <div class="row mb-2">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-3"> 상품 입/출고 등록하기 </h5>
+                                        {% if product %}
+                                            <form action="/inventory/{{ product }}" method="post">
+                                                {% csrf_token %}
+                                                {{ inventory_form }}
+                                                <button type="submit" class="btn btn-primary" style="float:right;">등록하기
+                                                </button>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!-- 글을 작성 하는 곳 -->
+                <div class="row mb-2">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-3"> 재고 목록   (총 수량 : {{ total }})</h5>
+                                        <table style="text-align: center; width: 100%;">
+                                            <thead>
+                                            <tr>
+                                                <th>코드</th>
+                                                <th>상품명</th>
+                                                <th>입고</th>
+                                            </tr>
+                                            {% for i in all_inventory %}
+                                                <tr>
+                                                    <td>{{ i.product.code }}</td>
+                                                    <td>{{ i.product.name }}</td>
+                                                    <td>{{ i.total_quantity }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+{% endblock %}
